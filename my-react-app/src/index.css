@@ -1,0 +1,168 @@
+
+:root {
+  --accent: #ff9e3d;
+  --accent-dark: #d87d21;
+  --card-bg: #ffffff;
+  --bg: #f5f7fa;
+  --text: #333;
+  --muted: #6c7a89;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+h1 {
+  margin: 2rem 0 1.5rem;
+  text-align: center;
+  font-size: clamp(1.8rem, 2.5vw + 1rem, 2.4rem);
+  letter-spacing: 0.5px;
+  color: var(--accent-dark);
+}
+
+
+.recipes-container {
+  display: grid;
+  gap: 2rem;
+  padding: 0 1.5rem 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Stack on very narrow screens */
+@media (max-width: 450px) {
+  .recipes-container {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 2rem;
+  }
+}
+
+
+.recipe-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+  /* subtle gradient edge */
+  border: 1px solid #e0e3e9;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* “Ribbon” accent bar */
+.recipe-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-dark) 100%
+  );
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.recipe-card h2 {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 1.35rem;
+  color: var(--accent-dark);
+}
+
+.recipe-card h3 {
+  margin: 1rem 0 0.4rem;
+  font-size: 1.1rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+ul,
+ol {
+  margin: 0 0 0.8rem 1.2rem;
+  padding: 0;
+}
+
+li + li {
+  margin-top: 0.35rem;
+}
+
+/* Custom checkbox for ingredient list */
+ul input[type="checkbox"] {
+  appearance: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 0.6rem;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background 0.15s ease;
+}
+
+ul input[type="checkbox"]:checked {
+  background: var(--accent);
+}
+
+ul input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Numbered instructions with counter styling */
+ol {
+  counter-reset: step;
+  list-style: none;
+}
+
+ol li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.2rem;
+}
+
+ol li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c3c7cd;
+  border-radius: 6px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #c3c7cd transparent;
+}
